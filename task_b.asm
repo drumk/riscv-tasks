@@ -2,8 +2,8 @@
 prompt_x: .asciz "Введите число x: "
 space: .asciz " "
 newline: .asciz "\n"
-group_y: .word 10    # ЗАМЕНИТЕ 10 на номер вашей группы!
-student_h: .word 5   # ЗАМЕНИТЕ 5 на ваш номер в списке!
+group_y: .word 121    # Твоя группа = 121
+student_h: .word 3    # Твой номер в списке = 3
 
 .text
 .globl main
@@ -20,29 +20,29 @@ main:
 
     # Загружаем y и h
     la t1, group_y
-    lw t1, 0(t1)        # t1 = y
+    lw t1, 0(t1)        # t1 = 121
     la t2, student_h
-    lw t2, 0(t2)        # t2 = h
+    lw t2, 0(t2)        # t2 = 3
 
     # Определяем min и max
     # t3 = min, t4 = max
     ble t0, t1, x_less_y
     
-    # Если x > y
-    mv t3, t1           # min = y
+    # Если x > 121
+    mv t3, t1           # min = 121
     mv t4, t0           # max = x
     j loop_start
 
 x_less_y:
-    # Если x <= y
+    # Если x <= 121
     mv t3, t0           # min = x
-    mv t4, t1           # max = y
+    mv t4, t1           # max = 121
 
 loop_start:
     # Проверяем, не вышли ли за границу max
     bgt t3, t4, end_loop
 
-    # Выводим текущее число (min)
+    # Выводим текущее число
     mv a0, t3
     li a7, 1
     ecall
@@ -52,7 +52,7 @@ loop_start:
     li a7, 4
     ecall
 
-    # Прибавляем шаг h
+    # Прибавляем шаг h (3)
     add t3, t3, t2
     j loop_start
 

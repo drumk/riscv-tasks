@@ -1,6 +1,6 @@
 .data
 prompt: .asciz "Введите число x: "
-my_number: .word 5  # ЗАМЕНИТЕ 5 на ваш номер в списке группы!
+my_number: .word 3  # Твой номер в списке = 3
 
 .text
 .globl main
@@ -15,12 +15,12 @@ main:
     ecall
     mv t0, a0           # t0 = x
 
-    # Загружаем наш номер
+    # Загружаем наш номер (3)
     la t1, my_number
-    lw t1, 0(t1)        # t1 = my_number
+    lw t1, 0(t1)        # t1 = 3
 
     # Сравниваем
-    beq t0, t1, match   # Если x == my_number, прыгаем на match
+    beq t0, t1, match   # Если x == 3, прыгаем на match
     
     # Если не совпало - выводим 0
     li a0, 0
